@@ -7,12 +7,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.demo2.R
 import com.example.demo2.databinding.ItemLayoutBinding
 import com.example.demo2.models.Products
+import com.squareup.picasso.Picasso
 
-class ProductAdapter(var products: ArrayList<Products>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
-    class ViewHolder(val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+
+
+class ProductAdapter(var products: ArrayList<Products>, val onButtonClickListener: OnButtonClickListener): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+    class ViewHolder(private val binding: ItemLayoutBinding, val onButtonClickListener: OnButtonClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bindView(product: Products){
             binding.product = product
 
+
+            binding.apply {
+                Picasso.get()
+                    .load(product.productImage)
+                    .into(productImageView)
+                addProductButton.setOnClickListener {
+                    onButtonClickListener.addProduct(product)
+                    numberOfProduct.text = product.getProductNumberStr()
+                }
+                subProductButton.setOnClickListener {
+                    onButtonClickListener.subProduct(product)
+                    numberOfProduct.text = product.getProductNumberStr()
+                }
+                deleteButton.setOnClickListener {
+                    onButtonClickListener.deleteProduct(product)
+                }
+            }
         }
     }
 
@@ -24,7 +44,7 @@ class ProductAdapter(var products: ArrayList<Products>): RecyclerView.Adapter<Pr
             parent,
             false
         )
-        return ViewHolder(binding)
+        return ViewHolder(binding, onButtonClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,5 +54,12 @@ class ProductAdapter(var products: ArrayList<Products>): RecyclerView.Adapter<Pr
 
     override fun getItemCount(): Int {
         return products.size
+    }
+
+    interface OnButtonClickListener {
+        fun deleteProduct(product: Products)
+        fun addProduct(product: Products)
+        fun subProduct(product: Products)
+
     }
 }

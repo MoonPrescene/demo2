@@ -9,114 +9,127 @@
             name="product"
             type="Products" />
     </data>
-    <LinearLayout
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <androidx.cardview.widget.CardView
-            android:elevation="0dp"
-            app:cardCornerRadius="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/productImageView"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:src="@mipmap/ic_launcher"
-                android:contentDescription="TODO"
-                tools:ignore="ContentDescription" />
-        </androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
+            android:id="@+id/productItem"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/productTextView1"
-                android:layout_marginEnd="3dp"
+            tools:ignore="InvalidId">
+            <androidx.cardview.widget.CardView
+                android:elevation="0dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@{product.productName}"
-                android:textSize="20sp"/>
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/productTextView2"
-                android:background="@android:color/transparent"
+                <ImageView
+                    android:id="@+id/productImageView"
+                    android:layout_width="84dp"
+                    android:layout_height="84dp"
+                    android:src="@{product.productImage}"
+                    tools:ignore="ContentDescription" />
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
                 android:layout_width="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_height="37dp"
-                android:gravity="left"
-                android:layout_gravity="left"
-                android:text="Xem khuyến mại"
-                android:textAllCaps="false"
-                android:textColor="@color/blue"
-                app:icon="@drawable/voucher_icon_foreground"
-                app:iconGravity="textStart"
-                app:iconSize="22dp" />
-            <TextView
-                android:id="@+id/productPriceTextView"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginStart="30dp"
-                android:text="@{product.getPrice()}"
-                android:textColor="@color/red"/>
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/productTextView1"
+                    android:layout_marginEnd="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="@{product.productName}"
+                    android:textSize="20sp"/>
+
+                <Button
+                    android:id="@+id/productTextView2"
+                    android:background="@android:color/transparent"
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_height="37dp"
+                    android:gravity="left"
+                    android:layout_gravity="left"
+                    android:text="Xem khuyến mại"
+                    android:textAllCaps="false"
+                    android:textColor="@color/blue"
+                    app:icon="@drawable/voucher_icon_foreground"
+                    app:iconGravity="textStart"
+                    app:iconSize="22dp" />
+                <TextView
+                    android:id="@+id/productPriceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="30dp"
+                    android:text="@{product.getPrice()}"
+                    android:textColor="@color/red"/>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="135dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="">
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_close_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.691"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/addProductButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="36dp"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deleteButton"
+                    app:layout_constraintVertical_bias="0.737" />
+
+                <TextView
+                    android:id="@+id/numberOfProduct"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{product.getProductNumberStr()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/addProductButton"
+                    app:layout_constraintVertical_bias="0.82"
+                    tools:layout_editor_absoluteX="24dp" />
+
+                <ImageButton
+                    android:id="@+id/subProductButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_baseline_sub_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/numberOfProduct"
+                    app:layout_constraintHorizontal_bias="0.25"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="135dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="">
-
-            <ImageButton
-                android:layout_marginTop="8dp"
-                android:id="@+id/deleteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_close_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.866"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/addProductButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_baseline_add_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deleteButton"
-                app:layout_constraintVertical_bias="0.757" />
-
-            <TextView
-                android:id="@+id/numberOfProduct"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="@{product.productNumber}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/addProductButton" />
-
-            <ImageButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/numberOfProduct"
-                android:src="@drawable/ic_baseline_sub_24"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
 </layout>
